@@ -1,0 +1,109 @@
+﻿<Window x:Class="TextBoxVisibility.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow"
+        Height="680" Width="680">
+
+    <Window.Resources>
+        <!-- TextBox for the player's name and a lable with their number -->
+        <ControlTemplate x:Key="PlayerNameInput" TargetType="ContentControl">
+            <StackPanel>
+                <!-- Player Name TextBox -->
+                <TextBox x:Name="PlayerName" Width="auto" Height="auto"
+                         MinWidth="50" MinHeight="5"
+                         HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                <!-- Player Number Tag -->
+                <Label x:Name="PlayerNumber" Content="{TemplateBinding Tag}"
+                       Width="auto" Height="auto"
+                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </StackPanel>
+        </ControlTemplate>
+        
+        <!-- TextBox for the player number -->
+        <ControlTemplate x:Key="NumberOfPlayersInput" TargetType="ContentControl">
+            <StackPanel>
+                <!-- Player Number Tag -->
+                <Viewbox>
+                    <Label x:Name="PlayerNumber" Content="Number of players (2 - 4)"
+                       Width="auto" Height="auto"
+                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Viewbox>
+                <!-- Player Name TextBox -->
+                <TextBox x:Name="NumberOfPlayers" Width="auto" Height="auto"
+                         MinWidth="50" MinHeight="5"
+                         HorizontalAlignment="Center" VerticalAlignment="Center"
+                         TextAlignment="Center"
+                         TextChanged="NumberOfPlayersChanged"/>
+                <!-- Start Game Button -->
+                <Button Content="Start Game" Click="StartGame"
+                        MinWidth="100" MinHeight="20" MaxWidth="200" MaxHeight="25"/>
+            </StackPanel>
+        </ControlTemplate>
+    </Window.Resources>
+
+    <Grid>
+        <!--Main Grid-->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        
+        <!-- Rectangle that highlights the Players Input-->
+        <Rectangle Fill="Transparent" Stroke="Black" StrokeThickness="2"
+                   Grid.Row="2" Grid.Column="2"
+                   Grid.RowSpan="4" Grid.ColumnSpan="4" />
+        
+        <!-- Number Of Players TextBox-->
+        <ContentControl Template="{StaticResource NumberOfPlayersInput}" Name="NumberOfPlayersInput"
+                        Grid.Row="4" Grid.Column="4"
+                        HorizontalAlignment="Center" VerticalAlignment="Center">
+        </ContentControl>
+
+        <!--Side TextBoxes-->
+        
+        <!-- Bottom Player -->
+        <ContentControl Template="{StaticResource PlayerNameInput}" Tag="Player 1" Name="BottomPlayer"
+                        Grid.Row="5" Grid.Column="4"
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        Visibility="Collapsed">
+        </ContentControl>
+
+        <!-- Top Player -->
+        <ContentControl Template="{StaticResource PlayerNameInput}" Tag="Player 2" Name="TopPlayer"
+                Grid.Row="2" Grid.Column="4"
+                HorizontalAlignment="Center" VerticalAlignment="Center"
+                Visibility="Collapsed">
+        </ContentControl>
+
+        <!-- Left Player -->
+        <ContentControl Template="{StaticResource PlayerNameInput}" Tag="Player 3" Name="LeftPlayer"
+        Grid.Row="4" Grid.Column="2"
+        HorizontalAlignment="Center" VerticalAlignment="Center"
+        Visibility="Collapsed">
+        </ContentControl>
+
+        <!-- Right Player -->
+        <ContentControl Template="{StaticResource PlayerNameInput}" Tag="Player 4" Name="RightPlayer"
+        Grid.Row="4" Grid.Column="5"
+        HorizontalAlignment="Center" VerticalAlignment="Center"
+        Visibility="Collapsed">
+        </ContentControl>
+    </Grid>
+</Window>
